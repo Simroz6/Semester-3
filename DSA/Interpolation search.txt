@@ -1,0 +1,27 @@
+const arr = [1, 4, 6, 7, 9, 12, 15, 16, 17, 23, 25, 26, 27, 31];
+const target = 25;
+const interpolationSearch = (arr = [], target){
+   let left = 0;
+   let right = arr.length - 1;
+   while (left <= right) {
+      const rangeDelta = arr[right] - arr[left];
+      const indexDelta = right - left;
+      const valueDelta = target - arr[left];
+      if (valueDelta < 0) {
+         return -1;
+      }
+      if (!rangeDelta) {
+         return arr[left] === target ? left : -1;
+      }
+      const middleIndex = left + Math.floor((valueDelta * indexDelta) / rangeDelta);
+      if (arr[middleIndex] === target) {
+         return middleIndex;
+      }
+      if (arr[middleIndex] < target) {
+         left = middleIndex + 1;
+      } else {
+         right = middleIndex - 1;
+      }
+   };
+   return -1;
+};
